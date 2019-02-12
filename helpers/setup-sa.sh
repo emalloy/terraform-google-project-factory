@@ -144,8 +144,11 @@ echo "Enabling APIs..."
 SERVICES="cloudresourcemanager \
 	  cloudbilling \
 	  iam \
+	  iamcredentials \
 	  admin \
-	  appengine"
+	  appengine \
+	  container \
+          containterregistry"
 
 for service in $SERVICES; do
   gcloud services enable \

@@ -140,25 +140,18 @@ gcloud projects add-iam-policy-binding \
 
 # Enable required API's
 echo "Enabling APIs..."
-gcloud services enable \
-  cloudresourcemanager.googleapis.com \
-  --project "${SEED_PROJECT}"
 
-gcloud services enable \
-  cloudbilling.googleapis.com \
-  --project "${SEED_PROJECT}"
+SERVICES="cloudresourcemanager \
+	  cloudbilling \
+	  iam \
+	  admin \
+	  appengine"
 
-gcloud services enable \
-  iam.googleapis.com \
-  --project "${SEED_PROJECT}"
-
-gcloud services enable \
-  admin.googleapis.com \
-  --project "${SEED_PROJECT}"
-
-gcloud services enable \
-  appengine.googleapis.com \
-  --project "${SEED_PROJECT}"
+for service in $SERVICES; do
+  gcloud services enable \
+  $service.googleapis.com \
+  --project "${SEED_PROJECT}" ;
+done
 
 # enable the billing account
 if [[ ${BILLING_ACCOUNT:-} != "" ]]; then
